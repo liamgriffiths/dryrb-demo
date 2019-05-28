@@ -5,15 +5,15 @@
 # values.
 #
 module Callable
-  def self.included(klass)
-    klass.extend(ClassMethods)
-  end
+  module Mixin
+    def self.included(klass)
+      klass.extend(ClassMethods)
+    end
 
-  # Class methods to include in our class.
-  #
-  module ClassMethods
-    def call(*args)
-      new.call(*args)
+    module ClassMethods
+      def call(*args)
+        new.call(*args)
+      end
     end
   end
 end

@@ -9,7 +9,7 @@ require_relative 'callable'
 # GreetingService creates new Greetings, but it doesn't work sometimes.
 #
 class GreetingService
-  include Callable
+  include Callable::Mixin
   include Dry::Monads::Result::Mixin
   include Dry::Monads::Try::Mixin
 
