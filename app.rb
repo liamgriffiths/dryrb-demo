@@ -6,7 +6,6 @@ require 'dry/matcher/result_matcher'
 require_relative 'greeting_service'
 require_relative 'response'
 
-
 # Our nice app.
 #
 class App < Roda
