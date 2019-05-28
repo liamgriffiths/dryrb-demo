@@ -11,16 +11,10 @@ GEM
       dry-core (~> 0.4, >= 0.4.4)
       dry-equalizer
     json (2.2.0)
-    mustermann (1.0.3)
+    puma (3.12.1)
     rack (2.0.7)
-    rack-protection (2.0.5)
+    roda (3.20.0)
       rack
-    sinatra (2.0.5)
-      mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.5)
-      tilt (~> 2.0)
-    tilt (2.0.9)
 
 PLATFORMS
   ruby
@@ -29,7 +23,8 @@ DEPENDENCIES
   dry-matcher
   dry-monads
   json
-  sinatra
+  puma
+  roda
 
 BUNDLED WITH
    1.16.4

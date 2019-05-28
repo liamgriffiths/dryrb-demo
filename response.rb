@@ -12,7 +12,7 @@ class Response
   )
 
   # (content_type: Symbol, status: Integer, body: String) -> Response
-  def initialize(content_type: :json, status: 200, body:)
+  def initialize(content_type: 'application/json', status: 200, body:)
     @content_type = content_type
     @status = status
     @body = body

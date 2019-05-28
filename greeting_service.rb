@@ -17,7 +17,7 @@ class GreetingService
   class CosmicRaysError < Error; end
 
   # (String) -> Result<Greeting> | Result<Unavailable>
-  def call(name: 'Human')
+  def call(name)
     message(name).fmap do |message|
       Greeting.new(message)
     end
@@ -25,7 +25,7 @@ class GreetingService
 
   private
 
-  # () -> Result<String> | Result<Unavailable>
+  # (String) -> Result<String> | Result<Unavailable>
   def message(name)
     Try(Unavailable) do
       raise Unavailable if rand < 0.5

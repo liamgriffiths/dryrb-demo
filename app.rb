@@ -1,18 +1,33 @@
 # frozen_string_literal: true
 
-require 'sinatra'
+require 'roda'
+require 'dry-matcher'
+require 'dry/matcher/result_matcher'
 require_relative 'greeting_service'
 require_relative 'response'
 
-get '/:name' do
-  greeting_result = GreetingService.call(name: params['name'])
-  res = Response.from_result(greeting_result)
 
-  content_type(res.content_type)
-  status(res.status)
-  body(res.body)
-end
+# Our nice app.
+#
+class App < Roda
+  ResultMatcher = Dry::Matcher::ResultMatcher
 
-error do
-  'Something broke!'
+  route do |r|
+    # Route for greetings
+    # ex. /hi/liam
+    r.get('hi', String) do |name|
+      ResultMatcher.call(GreetingService.call(name)) do |m|
+        m.success { |val| render_json(status: 200, body: val.to_json) }
+        m.failure { |err| render_json(status: 200, body: err.to_json) }
+      end
+    end
+  end
+
+  private
+
+  def render_json(status: 200, body:)
+    response.status = status
+    response['Content-Type'] = 'application/json'
+    response.write(body)
+  end
 end
