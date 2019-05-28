@@ -16,16 +16,9 @@ class GreetingService
   class Unavailable < Error; end
   class CosmicRaysError < Error; end
 
-  attr_reader(:name)
-
-  # (name: String) -> GreetingService
-  def initialize(name: 'Human')
-    @name = name
-  end
-
-  # () -> Result<Greeting> | Result<Unavailable>
-  def call
-    create_message.fmap do |message|
+  # (String) -> Result<Greeting> | Result<Unavailable>
+  def call(name: 'Human')
+    message(name).fmap do |message|
       Greeting.new(message)
     end
   end
@@ -33,7 +26,7 @@ class GreetingService
   private
 
   # () -> Result<String> | Result<Unavailable>
-  def create_message
+  def message(name)
     Try(Unavailable) do
       raise Unavailable if rand < 0.5
       raise CosmicRaysError if rand < 0.1
