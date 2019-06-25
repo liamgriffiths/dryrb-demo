@@ -5,7 +5,6 @@ require 'dry/monads/result'
 require 'dry/monads/try'
 require_relative 'greeting'
 require_relative 'error'
-require_relative 'callable'
 
 # GreetingService creates new Greetings, but it doesn't work sometimes.
 #
@@ -17,8 +16,18 @@ class GreetingService
   class Unavailable < Error; end
   class CosmicRaysError < Error; end
 
+  attr_reader(:name)
+
+  def self.call(name)
+    new(name).call
+  end
+
+  def initialize(name)
+    @name = name
+  end
+
   # (String) -> Result<Greeting> | Result<Unavailable>
-  def call(name)
+  def call
     message(name).fmap do |message|
       Greeting.new(message)
     end
