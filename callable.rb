@@ -1,3 +1,4 @@
+# typed: false
 # frozen_string_literal: true
 
 # Callable places a convenience class method on a class that allows it to be
