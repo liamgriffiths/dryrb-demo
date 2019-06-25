@@ -9,7 +9,7 @@ require 'json'
 class Greeting
   extend T::Sig
 
-  sig { params(message: String).returns(String) }
+  sig { params(message: String).void }
   def initialize(message)
     @message = T.let(message, String)
   end
