@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 require 'json'
@@ -6,7 +6,7 @@ require 'json'
 # An Error that can happen in our app.
 #
 class Error < StandardError
-  # () -> String
+  sig { returns(String) }
   def to_json
     JSON.generate(
       error: {
