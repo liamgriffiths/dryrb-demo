@@ -1,23 +1,24 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
+require 'sorbet-runtime'
 require 'json'
 
 # A Greeting is a nice thought to send to someone.
 #
 class Greeting
-  attr_reader(:message)
+  extend T::Sig
 
-  # (String) -> Greeting
+  sig { params(message: String).returns(String) }
   def initialize(message)
-    @message = message
+    @message = T.let(message, String)
   end
 
-  # () -> String
+  sig { returns(String) }
   def to_json
     JSON.generate(
       greeting: {
-        message: message
+        message: @message
       }
     )
   end
