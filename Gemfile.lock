@@ -11,7 +11,7 @@ GEM
       dry-core (~> 0.4, >= 0.4.4)
       dry-equalizer
     json (2.2.0)
-    rack (2.0.7)
+    rack (2.2.3)
     roda (3.20.0)
       rack
     sorbet (0.4.4304)
